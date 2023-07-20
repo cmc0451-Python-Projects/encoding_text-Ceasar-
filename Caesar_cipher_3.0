@@ -1,0 +1,30 @@
+alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
+
+text = input("Type your message:\n").lower()
+
+shift = int(input("Type the shift number:\n"))
+
+def caesar_cipher(direction_chosen, text_chosen, shift_chosen):
+  first_letter = text_chosen[0]
+  where_is = alphabet.index(first_letter)
+  if direction_chosen == "encode":
+    second_part = alphabet[(shift_chosen):26]
+    first_part = alphabet[0:(shift_chosen)]
+  else:
+    second_part = alphabet[-(shift):26]
+    first_part = alphabet[0:-(shift)]
+  new_list = second_part + first_part
+  length_of_word = -1
+  empty_list = []
+  for letter in text_chosen:
+    new_index = alphabet.index(letter)
+    encode_word = new_list[new_index]
+    length_of_word += 1
+    empty_list += " "
+    empty_list[length_of_word] = encode_word
+  answer = (''.join(empty_list))
+  print(f"The {direction_chosen}d text is '{''.join(empty_list)}'")
+
+caesar_cipher(direction_chosen=direction, text_chosen=text, shift_chosen=shift)
